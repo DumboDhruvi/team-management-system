@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Employees</h1>
+        <ul>
+            {% for employee in employees %}
+                <li>{{ employee.username }}</li>
+            {% empty %}
+                <li>No employees found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Team Detail{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ team.name }}</h1>
+        <h2>Members</h2>
+        <ul>
+            {% for member in members %}
+                <li>{{ member.username }}</li>
+            {% empty %}
+                <li>No members in this team.</li>
+            {% endfor %}
+        </ul>
+        
+        {% if members %}
+            <a href="{% url 'add_members' team_id=team.teamId %}">
+                <button>Add Members</button>
+            </a>
+            <a href="{% url 'remove_members' team_id=team.teamId %}">
+                <button>Remove Members</button>
+            </a>
+            <a href="{% url 'logout' %}">
+                <button>Logout</button>
+            </a>
+        {% endif %}
+        <a href="{% url 'team_list' %}">
+            <button>Back to Teams List</button>
+        </a>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <!-- Additional functionalities to add/remove members can be implemented here -->
+    </div>
+{% endblock %}
+

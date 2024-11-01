@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Team List{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Teams</h1>
+        <a href="{% url 'create_team' %}">Create a new team!</a>
+        <ul>
+            <h1>Teams you are a member of:</h1>
+            {% for team in teams %}
+                <li>
+                    <a href="{% url 'team_detail' team_id=team.teamId %}">{{ team.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+{% endblock %}
+

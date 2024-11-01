@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Team Management System{% endblock %}
+
+{% block content %}
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">Welcome to the Team Management System</h1>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="intro">
+            <h2>Manage Your Teams Effectively</h2>
+            <p>Use our system to create, manage, and collaborate with your team members.</p>
+            <a href="{% url 'signup' %}" class="cta-button">Get Started</a>
+        </section>
+    </main>
+{% endblock %}

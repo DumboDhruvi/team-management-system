@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Team List{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Team List</h1>
+        <ul>
+            {% for team in teams %}
+                <li>{{ team.name }} - <a href="{% url 'team_detail' team.teamId %}">View Details</a></li>
+            {% empty %}
+                <li>No teams available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

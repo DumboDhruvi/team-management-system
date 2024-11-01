@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Remove Members - {{ team.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <header>
+            <h1>Remove Members from {{ team.name }}</h1>
+            <nav>
+                <a href="{% url 'team_list' %}">Back to Teams</a>
+                <a href="{% url 'team_detail' team_id=team.teamId %}">Team Details</a>
+            </nav>
+        </header>
+
+        <main>
+            <form method="POST" action="{% url 'remove_members' team_id=team.teamId %}">
+                {% csrf_token %}
+                <section class="member-list">
+                    {% if members %}
+                        <h2>Select Members to Remove</h2>
+                        <ul>
+                            {% for member in members %}
+                                <li>
+                                    <label>
+                                        <input type="checkbox" name="selected_members" value="{{ member.employeeId }}">
+                                        {{ member.name }} ({{ member.username }})
+                                    </label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <button type="submit" class="remove-button">Remove Selected Members</button>
+                    {% else %}
+                        <p>No members in this team.</p>
+                    {% endif %}
+                </section>
+            </form>
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Members to Team{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Add Members to {{ team.name }}</h1>
+
+        <!-- Search form -->
+        <form method="get" action="">
+            <input type="text" name="q" placeholder="Search employees by name or username" value="{{ request.GET.q|default_if_none:'' }}" />
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Form to select and add members -->
+        <form method="post" action="">
+            {% csrf_token %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td><input type="checkbox" name="selected_employees" value="{{ employee.employeeId }}"></td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.username }}</td>
+                            <td>{{ employee.employeeId }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No employees found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Add Selected Members</button>
+        </form>
+
+        <a href="{% url 'team_detail' team.teamId %}">Back to Team Details</a>
+    </div>
+{% endblock %}
